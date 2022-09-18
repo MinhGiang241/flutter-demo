@@ -1,17 +1,12 @@
-import 'package:first_ios_app/second_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'cubit/counter_cubit.dart';
-import 'cubit/routers.dart';
-
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-  final AppRouter _appRouter = AppRouter();
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -20,12 +15,10 @@ class MyApp extends StatelessWidget {
       create: (context) => CounterCubit(),
       child: MaterialApp(
         title: 'Flutter Demo',
-        initialRoute: '/',
         theme: ThemeData(
             primarySwatch: Colors.blue,
             visualDensity: VisualDensity.adaptivePlatformDensity),
-        // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-        onGenerateRoute: _appRouter.onGenerateRoute,
+        home: const MyHomePage(title: 'Flutter Demo Home Page'),
       ),
     );
   }
@@ -56,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
             BlocBuilder<CounterCubit, CounterState>(
               builder: (context, state) {
                 return Text(
-                  state.counterValue.toString(),
+                  state.couterValue.toString(),
                   style: Theme.of(context).textTheme.headline4,
                 );
               },
@@ -79,16 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: const Icon(Icons.add),
                 ),
               ],
-            ),
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => BlocProvider.value(
-                          value: BlocProvider.of<CounterCubit>(context),
-                          child: SecondScreen(
-                              title: "Second Screen", color: Colors.red))));
-                },
-                child: const Text('Sencond Page'))
+            )
           ],
         ),
       ),
